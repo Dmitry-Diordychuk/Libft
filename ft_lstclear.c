@@ -6,7 +6,7 @@
 /*   By: kdustin <kdustin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 01:20:24 by kdustin           #+#    #+#             */
-/*   Updated: 2020/05/17 17:37:53 by kdustin          ###   ########.fr       */
+/*   Updated: 2020/05/22 15:15:44 by kdustin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 
 	if (lst != NULL)
 	{
-		while (*lst != NULL)
+		while (*lst != NULL && del != NULL)
 		{
 			temp = (*lst)->next;
 			del((*lst)->content);

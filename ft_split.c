@@ -6,103 +6,87 @@
 /*   By: kdustin <kdustin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 16:49:12 by kdustin           #+#    #+#             */
-/*   Updated: 2020/05/21 17:50:54 by kdustin          ###   ########.fr       */
+/*   Updated: 2020/05/22 19:50:37 by kdustin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	get_size(char *s, char c)
+int		get_malloc_len(char const *s, char c)
 {
-	char	*end_of_word;
-	size_t	counter;
+	size_t	i;
+	int		counter;
 
-	if (c == '\0')
-		return (1);
-	if (ft_strncmp(s, "", 1) == 0)
+	if (s == NULL)
 		return (0);
+	i = 0;
 	counter = 0;
-	end_of_word = s;
-	while ((end_of_word = ft_strchr(end_of_word, c)) != NULL)
+	while (s[i] != '\0')
 	{
-		while (end_of_word[0] == c)
-			end_of_word++;
-		counter++;
+		if (s[i] != c && s[i] != '\0')
+		{
+			while (s[i] != c && s[i] != '\0')
+				i++;
+			counter++;
+		}
+		if (s[i] != '\0')
+			i++;
 	}
-	counter++;
 	return (counter);
 }
 
-static char	**fill_array(char **array, char *str, char c)
+char	**fill_array(char **array, char const *s, char c)
 {
-	char	*start;
-	char	*end;
-	char	**first;
+	const char	*start;
+	const char	*end;
+	size_t		i;
 
-	first = array;
-	start = str;
-	end = str;
-	while ((end = ft_strchr(start, c)) != NULL && c != '\0')
+	start = s;
+	end = s;
+	i = 0;
+	while (*start != '\0')
 	{
-		*end = '\0';
-		if (!(*array = ft_strdup(start)))
+		while (*start == c)
+			start++;
+		if (*start == '\0')
+			break ;
+		end = start;
+		while (*end != '\0' && *end != c)
+			end++;
+		if (!(array[i] = ft_calloc(end - start + 1, sizeof(char))))
 			return (NULL);
-		while ((++end)[0] == c)
-			;
+		ft_strlcpy(array[i], start, end - start + 1);
+		i++;
 		start = end;
-		array++;
 	}
-	if (ft_strncmp(start, "", 1) != 0)
-	{
-		if (!(*array = ft_strdup(start)))
-			return (NULL);
-	}
-	return (first);
+	return (array);
 }
 
-static char	**free_every_thing(char *copy, char *set, char **result, size_t n)
+void	free_result(char **array, size_t len)
 {
 	size_t	i;
 
-	if (copy != NULL)
-		free(copy);
-	if (set != NULL)
-		free(set);
-	if (result != NULL)
+	i = 0;
+	while (i < len)
 	{
-		i = 0;
-		while (i < n)
-		{
-			free(result[i]);
-			i++;
-		}
-		free(result);
+		free(array[i]);
 	}
-	return (NULL);
+	free(array);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
-	char	*copy;
-	char	*set;
-	char	**result;
-	size_t	size;
+	char			**result;
+	const size_t	len = get_malloc_len(s, c) + 1;
 
-	size = 0;
-	copy = NULL;
-	set = NULL;
-	result = NULL;
-	if (!(set = (char*)ft_calloc(2, sizeof(char))))
+	if (s == NULL)
 		return (NULL);
-	set[0] = c;
-	if (!(copy = ft_strtrim(s, set)))
-		return (free_every_thing(copy, set, result, size));
-	size = get_size(copy, c) + 1;
-	if (!(result = (char**)ft_calloc(size, sizeof(char*))))
-		return (free_every_thing(copy, set, result, size));
-	if (!(result = fill_array(result, copy, c)))
-		return (free_every_thing(copy, set, result, size));
-	free(copy);
-	free(set);
+	if (!(result = (char**)ft_calloc(len, sizeof(char*))))
+		return (NULL);
+	if (!(result = fill_array(result, s, c)))
+	{
+		free_result(result, len);
+		return (NULL);
+	}
 	return (result);
 }
