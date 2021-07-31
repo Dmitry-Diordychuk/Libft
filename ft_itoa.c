@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdustin <kdustin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kdustin <kdustin@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 14:45:53 by kdustin           #+#    #+#             */
-/*   Updated: 2020/05/15 20:42:18 by kdustin          ###   ########.fr       */
+/*   Updated: 2021/03/26 20:47:36 by kdustin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+** Allocates (with malloc(3)) and returns a string representing the integer re-
+** ceived as an argument. Negative numbers must be handled.
+**
+** RETURN VALUE
+** The string representing the integer. NULL if the allocation fails.
+*/
 
 static int	getlen(int n)
 {
@@ -42,7 +50,7 @@ char		*ft_itoa(int n)
 
 	i = 0;
 	input = n;
-	if (!(result = (char*)malloc((getlen(n) + isngtive(n) + 1) * sizeof(char))))
+	if (!(result = (char*)ft_calloc(getlen(n) + isngtive(n) + 1, sizeof(char))))
 		return (NULL);
 	if (n < 0)
 	{

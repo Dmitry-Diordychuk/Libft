@@ -6,11 +6,22 @@
 /*   By: kdustin <kdustin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 23:42:17 by kdustin           #+#    #+#             */
-/*   Updated: 2020/05/12 19:27:03 by kdustin          ###   ########.fr       */
+/*   Updated: 2020/07/10 01:17:16 by kdustin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+** The strnstr() function locates the first occurrence of the null-terminated
+** string s2 in the string s1, where not more than n characters are searched.
+** Characters that appear after a `\0' character are not searched.
+**
+** RETURN VALUES
+** If s2 is an empty string, s1 is returned; if needle occurs nowhere in s1,
+** NULL is returned; otherwise a pointer to the first character of the first
+** occurrence of s2 is returned.
+*/
 
 char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {

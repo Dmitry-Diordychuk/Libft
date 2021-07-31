@@ -6,11 +6,18 @@
 /*   By: kdustin <kdustin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 20:21:24 by kdustin           #+#    #+#             */
-/*   Updated: 2020/05/15 01:54:05 by kdustin          ###   ########.fr       */
+/*   Updated: 2020/07/10 00:26:26 by kdustin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+** Counts the number of elements in a list.
+**
+** RETURN VALUE
+** Length of the list.
+*/
 
 int	ft_lstsize(t_list *lst)
 {

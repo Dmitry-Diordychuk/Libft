@@ -6,11 +6,19 @@
 /*   By: kdustin <kdustin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 18:37:48 by kdustin           #+#    #+#             */
-/*   Updated: 2020/05/13 17:54:29 by kdustin          ###   ########.fr       */
+/*   Updated: 2020/07/10 00:36:43 by kdustin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+** The memmove() function copies n bytes from string src to string dest. The two
+** strings may overlap; the copy is always done in a non-destructive manner.
+**
+** RETURN VALUES
+** The memmove() function returns the original value of dest.
+*/
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {

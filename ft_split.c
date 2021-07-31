@@ -6,11 +6,21 @@
 /*   By: kdustin <kdustin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 16:49:12 by kdustin           #+#    #+#             */
-/*   Updated: 2020/05/22 19:50:37 by kdustin          ###   ########.fr       */
+/*   Updated: 2020/07/18 17:07:35 by kdustin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+** Allocates (with malloc(3)) and returns an array of strings obtained by split-
+** ting ’s’ using the character ’c’ as a delimiter. The array must be ended by a
+** NULL pointer.
+**
+** RETURN VALUE
+** The array of new strings resulting from the split. NULL if the allocation
+** fails.
+*/
 
 int		get_malloc_len(char const *s, char c)
 {
@@ -69,9 +79,9 @@ void	free_result(char **array, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		free(array[i]);
+		ft_free(array[i]);
 	}
-	free(array);
+	ft_free(array);
 }
 
 char	**ft_split(char const *s, char c)
